@@ -10,12 +10,13 @@
 
 use tock_registers::interfaces::*;
 
+use crate::sync::*;
+
 use crate::mrs;
 use crate::ContextFrame;
-use crate::sync::{data_abort_handler, hvc_handler};
+
 use crate::ContextFrameTrait;
 
-use log::{warn, info};
 //global_asm!(include_str!("exception.S"));
 
 #[inline(always)]
@@ -162,13 +163,13 @@ pub fn exception_data_abort_access_is_sign_ext() -> bool {
 
 /// deal with lower aarch64 synchronous exception
 #[no_mangle]
-pub extern "C" fn lower_aarch64_synchronous(ctx: &mut ContextFrame) {
+pub extern "C" fn lower_aarch64_synchronous_test(ctx: &mut ContextFrame) {
     // info!("lower_aarch64_synchronous");
     // current_cpu().set_context_addr(ctx);
 
     match exception_class() {
         0x24 => {
-            info!("Core data_abort_handler");
+            // info!("Core data_abort_handler");
             data_abort_handler(ctx);
         }
         0x16 => {

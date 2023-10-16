@@ -1,5 +1,5 @@
 use aarch64_cpu::{asm, asm::barrier, registers::*};
-use log::{warn, info};
+
 use tock_registers::interfaces::{ReadWriteable, Readable, Writeable};
 
 use crate::vcpu::VmCpuRegisters;
@@ -30,7 +30,7 @@ pub fn hvc_guest_handler(
     match hvc_type {
         HVC_SYS => hvc_sys_handler(event, x0, x1),
         _ => {
-            info!("hvc_guest_handler: unknown hvc type {} event {}", hvc_type, event);
+            // info!("hvc_guest_handler: unknown hvc type {} event {}", hvc_type, event);
             Err(())
         }
     }

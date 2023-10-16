@@ -1,5 +1,5 @@
 [package]
-name = "el2"
+name = "el2_code"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,8 +9,3 @@ edition = "2021"
 aarch64-cpu = "9.3"
 tock-registers = "0.8.1"
 cortex-a = "8.1.1"
-log = "0.4"
-
-[lib]
-crate-type = ["cdylib", "rlib"]
-version = "0.1.0"

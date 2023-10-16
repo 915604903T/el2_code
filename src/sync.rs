@@ -15,7 +15,6 @@ use crate::hvc::{hvc_guest_handler, HVC_SYS, HVC_SYS_BOOT};
 use crate::{ContextFrame, ContextFrameTrait};
 use crate::vcpu::VmCpuRegisters;
 
-use log::info;
 pub const HVC_RETURN_REG: usize = 0;
 
 pub fn data_abort_handler(ctx: &mut ContextFrame) {
@@ -88,7 +87,7 @@ pub fn hvc_handler(ctx: &mut ContextFrame) {
             ctx.set_gpr(HVC_RETURN_REG, val);
         }
         Err(_) => {
-            info!("Failed to handle hvc request fid 0x{:x} event 0x{:x}", hvc_type, event);
+            // info!("Failed to handle hvc request fid 0x{:x} event 0x{:x}", hvc_type, event);
             ctx.set_gpr(HVC_RETURN_REG, usize::MAX);
         }
     }

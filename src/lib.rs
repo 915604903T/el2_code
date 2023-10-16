@@ -2,16 +2,13 @@
 #![no_std]
 
 mod context_frame;
-mod hvc;
-mod sync;
-mod trap_el2;
-mod exception;
 mod vcpu;
 
-use log::{warn, info};
-type ContextFrame = crate::context_frame::Aarch64ContextFrame;
+mod exception;
+mod sync;
+mod hvc;
 
-extern crate alloc;
+type ContextFrame = crate::context_frame::Aarch64ContextFrame;
 
 #[macro_export]
 macro_rules! mrs {
@@ -55,7 +52,8 @@ pub trait ContextFrameTrait {
 }
 
 #[no_mangle]
-pub extern "C" fn test() {
-    let ctx = ContextFrame::new(1, 2, 3);
-    info!("this is contextFrame:{}", ctx);
+#[inline(never)]
+#[link_section = ".el2code.test"]
+pub extern "C" fn myel2test1(a:usize, b :usize) -> usize {
+    a+b
 }
